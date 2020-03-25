@@ -3,8 +3,27 @@ import { Request, Response } from 'express'
 const connection = require('../database/connection') // eslint-disable-line @typescript-eslint/no-var-requires
 
 class IncidentController {
+  // private limit: number;
+  // constructor () {
+  //   this.limit = 5
+  // }
+
   public async index (req: Request, res: Response): Promise<Response> {
-    const incidents = await connection('incidents').select('*')
+    const LIMIT = 5
+    const { page = 1 } = req.query
+
+    // getting total count
+    const [count] = await connection('incidents').count()
+
+    console.log(count)
+
+    const incidents = await connection('incidents')
+      .limit(LIMIT)
+      .offset((page - 1) * LIMIT)
+      .select('*')
+
+    // adding the total to the response header
+    res.header('X-Total-Count', count['count(*)'])
 
     return res.json(incidents)
   }
