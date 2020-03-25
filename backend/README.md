@@ -94,6 +94,47 @@ Then, we add `prettier/@typescript-eslint` to the `extends` array inside `.eslin
 ```
 
 
+## The application itself
+
+#### Database
+In this app we are using the _sqlite3_ along with [Knex](http://knexjs.org/) query builder.
+```
+yarn add knex
+yarn add sqlite3
+```
+Next, we run the knex package with npx (or with yarn): `npx knex init` or `yarn knex init`. We also created a _database_
+folder inside the _src_ folder and added the following configuration to the development environment:
+```
+development: {
+    client: 'sqlite3',
+    connection: {
+      filename: './src/database/db.sqlite'
+    }
+  },
+```
+
+To create the tables, we are going to use _migrations_. We create the directory inside the database and also update the
+`knexfile.js` file with it.
+
+
+
+
+
+The database entities are described below: 
+- ONGs (Non-governamental organizations - NGO)
+- Incidents
+
+The functionalities are below:
+- Login
+- ONG Registrations
+- Register incidents
+- Delete incidents
+- List incidents of a given ONG
+- List **all** incidents of the several ONGs stored in the DB
+- Get in contact with the ONG (via WhatsApp or Email) - mobile app
+
+
+
 
 
 
