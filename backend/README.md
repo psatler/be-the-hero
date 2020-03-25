@@ -114,7 +114,19 @@ development: {
 ```
 
 To create the tables, we are going to use _migrations_. We create the directory inside the database and also update the
-`knexfile.js` file with it.
+`knexfile.js` file with it. To create a [migration](http://knexjs.org/#Migrations),
+we run `npx knex migrate:make migration_name` (or with `yarn` as already mentioned above). So, for example,
+```
+npx knex migrate:make create_ongs
+```
+After setting up the migration, we can execute it by running with the `latest` command.
+```
+npx knex migrate:latest
+
+or
+
+yarn knex migrate:latest
+```
 
 
 
