@@ -46,6 +46,16 @@ class IncidentController {
 
     return res.status(204).send() // OK status with no content (204)
   }
+
+  // THIS SHOULD'VE BEEN IN THE PROFILE_CONTROLLER.
+  // Though, due to error TS2451: Cannot redeclare block-scoped variable 'connection_1'. I've inserted it here
+  public async listOngIncidents (req: Request, res: Response): Promise<Response> {
+    const ong_id = req.headers.authorization // eslint-disable-line
+
+    const incidents = await connection('incidents').where('ong_id', ong_id).select('*') // incidents of a specific ong
+
+    return res.json(incidents)
+  }
 }
 
 export default new IncidentController()
