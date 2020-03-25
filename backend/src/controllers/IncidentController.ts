@@ -18,9 +18,17 @@ class IncidentController {
     console.log(count)
 
     const incidents = await connection('incidents')
+      .join('ongs', 'ongs.id', '=', 'incidents.ong_id') // looking at the ongs table and finding those ones were the ids are equal
       .limit(LIMIT)
       .offset((page - 1) * LIMIT)
-      .select('*')
+      .select([
+        'incidents.*',
+        'ongs.name',
+        'ongs.email',
+        'ongs.whatsapp',
+        'ongs.city',
+        'ongs.uf'
+      ]) // all the incidents columns but only certain ones from the ongs table
 
     // adding the total to the response header
     res.header('X-Total-Count', count['count(*)'])
