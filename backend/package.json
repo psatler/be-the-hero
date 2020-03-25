@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/server.ts",
-    "dev:server": "ts-node-dev --respawn --transpileOnly src/server.ts",
+    "dev:server": "ts-node-dev --respawn --transpileOnly --ignore-watch node_modules src/server.ts",
     "build": "tsc"
   },
   "devDependencies": {
