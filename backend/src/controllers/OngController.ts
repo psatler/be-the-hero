@@ -1,11 +1,12 @@
 import { Request, Response } from 'express'
 import crypto from 'crypto'
 
-import connection from '../database/connection'
+// import connection from '../database/connection'
+const connectionOng = require('../database/connection') // eslint-disable-line @typescript-eslint/no-var-requires
 
 class OngController {
   public async index (req: Request, res: Response): Promise<Response> {
-    const ongs = await connection('ongs').select('*')
+    const ongs = await connectionOng('ongs').select('*')
 
     return res.json(ongs)
   }
@@ -15,7 +16,7 @@ class OngController {
 
     const id = crypto.randomBytes(4).toString('HEX')
 
-    await connection('ongs').insert({
+    await connectionOng('ongs').insert({
       id,
       name,
       email,
