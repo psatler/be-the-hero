@@ -1,8 +1,9 @@
 import React from 'react';
+import './global.css'
 
 function App() {
   return (
-    <h1>Hellow, world!</h1>
+    <h1>Hello, world!</h1>
   );
 }
 
